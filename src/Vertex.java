@@ -15,13 +15,12 @@ public class Vertex {
 
     public void addConnection(Vertex vertex) {
         this.connections.add(vertex);
-        vertex.connectionReq.add(this);
-
+        vertex.connections.add(this);
     }
 
     public void reset() {
         this.isVisited = false;
-        this.numberValue = 0;
+        this.numberValue = 999;
     }
 
     public LinkedList<Vertex> findMutual(Vertex otherVertex) {
@@ -38,6 +37,7 @@ public class Vertex {
     public int findErdosNumber(Vertex otherVertex) {
         LinkedList<Vertex> queue = new LinkedList<Vertex>();
         queue.add(this);
+        this.numberValue = 0;
 
         while (!queue.isEmpty()) {
             Vertex currentFirst = queue.removeFirst();
@@ -47,17 +47,15 @@ public class Vertex {
 
             // Mark the otherVertex as visited
             currentFirst.isVisited = true;
-            System.out.print(currentFirst.name + " ");
 
             LinkedList<Vertex> allConnections = currentFirst.connections;
 
             if (allConnections == null)
                 continue;
-
             for (Vertex connection : allConnections) {
                 // We only add unvisited neighbors
                 if (!connection.isVisited) {
-                    if (currentFirst.numberValue + 1 < connection.numberValue) {
+                    if (currentFirst.numberValue +1 < connection.numberValue) {
                         connection.numberValue = currentFirst.numberValue + 1;
                     }
                     queue.add(connection);
