@@ -48,7 +48,7 @@ public class Vertex {
         return connectionsName;
     }
 
-    void acceptRequestConnection(Vertex v) {
+    public void acceptRequestConnection(Vertex v) {
         this.connectionReq.remove(v);
         this.connections.add(v);
     }
@@ -59,6 +59,14 @@ public class Vertex {
 
     public String readMessage(Vertex v) {
         return this.inbox.get(v);
+    }
+
+    public Map<String, String> getAllInbox() {
+        Map<String, String> inbox = new HashMap<String, String>();
+        for (Vertex vertex : this.inbox.keySet()) {
+            inbox.put(vertex.name, this.inbox.get(vertex));
+        }
+        return inbox;
     }
 
     public List<String> getFriendRecommendations() {
