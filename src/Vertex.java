@@ -6,6 +6,7 @@ public class Vertex {
     public LinkedList<Vertex> connections;
     public Boolean isVisited;
     public LinkedList<Vertex> connectionReq;
+    public Map<Vertex, String> inbox;
 
     public Vertex(String name) {
         this.name = name;
