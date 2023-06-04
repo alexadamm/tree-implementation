@@ -1,4 +1,4 @@
-import java.util.LinkedList;
+import java.util.*;
 
 public class Vertex {
     public String name;
@@ -11,6 +11,7 @@ public class Vertex {
     public Vertex(String name) {
         this.name = name;
         this.connections = new LinkedList<Vertex>();
+        this.connectionReq = new LinkedList<Vertex>();
         this.reset();
     }
 
@@ -33,9 +34,17 @@ public class Vertex {
         return connectionsName;
     }
 
-    public void reset() {
-        this.isVisited = false;
-        this.numberValue = 999;
+    public List<String> getRequestConnections() {
+        List<String> connectionsName = new ArrayList<String>();
+        for (Vertex vertex : this.connectionReq) {
+            connectionsName.add(vertex.name);
+        }
+        return connectionsName;
+    }
+
+    void acceptRequestConnection(Vertex v) {
+        this.connectionReq.remove(v);
+        this.connections.add(v);
     }
 
     public LinkedList<Vertex> findMutual(Vertex otherVertex) {
@@ -45,7 +54,6 @@ public class Vertex {
                 mutual.add(vertex);
             }
         }
-
         return mutual;
     }
 
