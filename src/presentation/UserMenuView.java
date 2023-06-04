@@ -179,12 +179,10 @@ public class UserMenuView implements ICLIView {
             System.out.print("Enter your choice: ");
             Scanner scanner2 = new Scanner(System.in);
             int choice3 = scanner2.nextInt();
-            scanner2.close();
             if (choice3 == 1) {
                 System.out.print("Enter your message: ");
                 Scanner scanner3 = new Scanner(System.in);
                 String message = scanner3.nextLine();
-                scanner3.close();
                 this.socialMediaService.sendMessage(currentUser, senders.get(choice2 - 1), message);
             }
         }
