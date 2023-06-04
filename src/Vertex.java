@@ -96,6 +96,7 @@ public class Vertex {
         Comparator<String> valueComparator = (k1, k2) -> recConnections.get(k1).compareTo(recConnections.get(k2));
 
         List<String> connectionList = new ArrayList<String>(recConnections.keySet());
+        connectionList.remove(this.name);
         Collections.sort(connectionList, valueComparator);
 
         return connectionList;
