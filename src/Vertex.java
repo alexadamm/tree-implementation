@@ -47,6 +47,14 @@ public class Vertex {
         this.connections.add(v);
     }
 
+    public void sendMessage(Vertex v, String message) {
+        v.inbox.put(this, message);
+    }
+
+    public String readMessage(Vertex v) {
+        return this.inbox.get(v);
+    }
+
     public LinkedList<Vertex> findMutual(Vertex otherVertex) {
         LinkedList<Vertex> mutual = new LinkedList<Vertex>();
         for (Vertex vertex : this.connections) {
