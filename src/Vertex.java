@@ -1,4 +1,10 @@
-import java.util.*;
+import java.util.ArrayList;
+import java.util.Collections;
+import java.util.HashMap;
+import java.util.LinkedList;
+import java.util.List;
+import java.util.Map;
+import java.util.Comparator;
 
 public class Vertex {
     public String name;
@@ -53,6 +59,46 @@ public class Vertex {
 
     public String readMessage(Vertex v) {
         return this.inbox.get(v);
+    }
+
+    public List<String> getFriendRecommendations() {
+        Map<String, Integer> recConnections = new HashMap<String, Integer>();
+        int maxDegree = 2;
+        LinkedList<Vertex> queue = new LinkedList<Vertex>();
+        queue.add(this);
+        this.numberValue = 0;
+        while (!queue.isEmpty()) {
+            Vertex currentFirst = queue.removeFirst();
+            if (currentFirst.numberValue > maxDegree)
+                break;
+            if (currentFirst.isVisited)
+                continue;
+            currentFirst.isVisited = true;
+            LinkedList<Vertex> allConnections = currentFirst.connections;
+            if (allConnections == null)
+                continue;
+            for (Vertex connection : allConnections) {
+                if (!connection.isVisited) {
+                    queue.add(connection);
+                    if (currentFirst.numberValue + 1 < connection.numberValue)
+                        connection.numberValue = currentFirst.numberValue + 1;
+                }
+                if (connection.numberValue <= maxDegree && !this.connections.contains(connection)) {
+                    if (recConnections.containsKey(connection.name)) {
+                        recConnections.put(connection.name, recConnections.get(connection.name) + 1);
+                    } else {
+                        recConnections.put(connection.name, 1);
+                    }
+                }
+            }
+
+        }
+        Comparator<String> valueComparator = (k1, k2) -> recConnections.get(k1).compareTo(recConnections.get(k2));
+
+        List<String> connectionList = new ArrayList<String>(recConnections.keySet());
+        Collections.sort(connectionList, valueComparator);
+
+        return connectionList;
     }
 
     public LinkedList<Vertex> findMutual(Vertex otherVertex) {
