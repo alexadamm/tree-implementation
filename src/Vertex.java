@@ -14,7 +14,12 @@ public class Vertex {
         this.reset();
     }
 
-    public void addConnection(Vertex vertex) {
+    public void reset() {
+        this.isVisited = false;
+        this.numberValue = 999;
+    }
+
+    public void requestConnection(Vertex vertex) {
         this.connections.add(vertex);
         vertex.connections.add(this);
     }
