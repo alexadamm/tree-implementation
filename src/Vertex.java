@@ -21,7 +21,15 @@ public class Vertex {
 
     public void requestConnection(Vertex vertex) {
         this.connections.add(vertex);
-        vertex.connections.add(this);
+        vertex.connectionReq.add(this);
+    }
+
+    public List<String> getConnections() {
+        List<String> connectionsName = new ArrayList<String>();
+        for (Vertex vertex : this.connections) {
+            connectionsName.add(vertex.name);
+        }
+        return connectionsName;
     }
 
     public void reset() {
