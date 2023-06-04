@@ -1,13 +1,16 @@
 package domain.services;
+
 import domain.model.User;
 import java.util.*;
 
 public class SocialMediaService implements ISocialMediaService {
     public HashMap<User, HashMap<User, Integer>> tempDb;
+
     // for matrix of connections with the integer is the distance between 2 users
-    public SocialMediaService( HashMap<User, HashMap<User, Integer>> tempDb) {
+    public SocialMediaService(HashMap<User, HashMap<User, Integer>> tempDb) {
         this.tempDb = tempDb;
     }
+
     @Override
     public void requestConnection(User user, User targetUser) {
         if (user.connectionReq.contains(targetUser)) {
@@ -92,7 +95,7 @@ public class SocialMediaService implements ISocialMediaService {
             if (allConnections == null)
                 continue;
             for (User connection : allConnections) {
-                if (!currentFirst.isVisited) {
+                if (!connection.isVisited) {
                     queue.add(connection);
                     if (currentFirst.numberValue + 1 < connection.numberValue)
                         connection.numberValue = currentFirst.numberValue + 1;
