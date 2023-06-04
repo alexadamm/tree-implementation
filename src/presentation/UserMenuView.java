@@ -187,14 +187,4 @@ public class UserMenuView implements ICLIView {
             }
         }
     }
-
-    private boolean isUserExists(String name) {
-        HashMap<User, HashMap<User, Integer>> tempDb = socialMediaService.tempDb;
-        for (User user : tempDb.keySet()) {
-            if (user.name.equals(name)) {
-                return true;
-            }
-        }
-        return false;
-    }
 }
