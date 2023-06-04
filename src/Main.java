@@ -3,7 +3,7 @@ import java.util.LinkedList;
 
 public class Main {
     public static void main(String[] args) {
-        int numVertices = 5;
+ /*       int numVertices = 5;
         Vertex[] vertices = new Vertex[numVertices];
         for (int i = 0; i < vertices.length; i++) {
             vertices[i] = new Vertex("Node "+i);
@@ -31,6 +31,15 @@ public class Main {
     public static void resetAll(Vertex[] vertices) {
         for (Vertex vertex : vertices) {
             vertex.reset();
-        }
+        } */
+        
+        System.out.println("Selamat datang di YazidBook");
+        System.out.println("Tentukan aksi anda : login(l)/ register(r)");
+        Scanner sc = new Scanner(System.in);
+        String lr = sc.nextLine();
+        if (lr =="l") {
+		;} else if (lr =="r") {
+		;} else System.out.println("Invalid input");
+		
     }
 }
