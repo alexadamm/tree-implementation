@@ -15,6 +15,7 @@ public class Vertex {
     }
 
     public void reset() {
+        this.inbox = new HashMap<Vertex, String>();
         this.isVisited = false;
         this.numberValue = 999;
     }
@@ -61,15 +62,17 @@ public class Vertex {
 
             // Mark the otherVertex as visited
             currentFirst.isVisited = true;
+            System.out.print(currentFirst.name + " ");
 
             LinkedList<Vertex> allConnections = currentFirst.connections;
 
             if (allConnections == null)
                 continue;
+
             for (Vertex connection : allConnections) {
                 // We only add unvisited neighbors
                 if (!connection.isVisited) {
-                    if (currentFirst.numberValue +1 < connection.numberValue) {
+                    if (currentFirst.numberValue + 1 < connection.numberValue) {
                         connection.numberValue = currentFirst.numberValue + 1;
                     }
                     queue.add(connection);
