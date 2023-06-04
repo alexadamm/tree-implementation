@@ -81,7 +81,7 @@ public class UserMenuView implements ICLIView {
     }
 
     private void addNewConnection() {
-        System.out.print("Enter someone name to add as connection: ");
+        System.out.print("Enter a name to add as connection: ");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine();
         User result = this.socialMediaService.getUserByName(name);
@@ -137,7 +137,7 @@ public class UserMenuView implements ICLIView {
 
     private void sendMessage() {
         LinkedList<User> connections = this.showConnectionsList();
-        System.out.print("Enter your friend name: ");
+        System.out.print("Enter your friend's name: ");
         Scanner scanner = new Scanner(System.in);
         String name = scanner.nextLine();
         for (User user : connections) {
