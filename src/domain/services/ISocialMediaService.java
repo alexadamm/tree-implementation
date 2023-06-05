@@ -1,10 +1,11 @@
 package domain.services;
-import domain.model.User;
 
-import java.util.HashMap;
+import domain.model.User;
 import java.util.LinkedList;
+
 public interface ISocialMediaService {
     void requestConnection(User user, User targetUser);
+
     LinkedList<User> getConnections(User user);
 
     LinkedList<User> getRequestConnections(User user);
@@ -28,5 +29,4 @@ public interface ISocialMediaService {
     User login(String name);
 
     User register(String name);
-
 }

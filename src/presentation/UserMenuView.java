@@ -3,8 +3,6 @@ package presentation;
 import domain.model.User;
 import domain.services.SocialMediaService;
 import utils.Helper;
-
-import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.Scanner;
 

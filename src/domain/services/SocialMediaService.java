@@ -6,7 +6,6 @@ import java.util.*;
 public class SocialMediaService implements ISocialMediaService {
     public HashMap<User, HashMap<User, Integer>> tempDb;
 
-    // for matrix of connections with the integer is the distance between 2 users
     public SocialMediaService(HashMap<User, HashMap<User, Integer>> tempDb) {
         this.tempDb = tempDb;
     }
