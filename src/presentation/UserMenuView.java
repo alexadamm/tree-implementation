@@ -104,14 +104,6 @@ public class UserMenuView implements ICLIView {
     }
 
     private void showRecommendedConnections() {
-        HashMap<User, HashMap<User, Integer>> tempDb = socialMediaService.tempDb;
-
-//        reset numberValue and isVisited
-        for (User user : tempDb.keySet()) {
-            user.isVisited = false;
-            user.numberValue = 999;
-        }
-
         LinkedList<User> connectionRecommendations = this.socialMediaService.getFriendRecommendations(this.currentUser);
         System.out.println("Choose to send connection request: ");
         System.out.println("0. Back");
