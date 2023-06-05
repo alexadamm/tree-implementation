@@ -115,6 +115,9 @@ public class SocialMediaService implements ISocialMediaService {
         LinkedList<User> connectionList = new LinkedList<>(recConnections.keySet());
         connectionList.remove(user);
         Collections.sort(connectionList, valueComparator.reversed());
+        for (User u : this.tempDb.keySet()) {
+            u.reset();
+        }
 
         return connectionList;
     }
@@ -153,6 +156,10 @@ public class SocialMediaService implements ISocialMediaService {
                     queue.add(connection);
                 }
             }
+        }
+
+        for (User u : this.tempDb.keySet()) {
+            u.reset();
         }
 
         return otherUser.numberValue;
