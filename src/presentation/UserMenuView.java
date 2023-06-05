@@ -12,6 +12,7 @@ public class UserMenuView implements ICLIView {
     boolean isLoggedIn;
     User currentUser;
     SocialMediaService socialMediaService;
+
     public UserMenuView(User user, SocialMediaService socialMediaService) {
         this.currentUser = user;
         this.socialMediaService = socialMediaService;
@@ -38,45 +39,45 @@ public class UserMenuView implements ICLIView {
 
     @Override
     public void action(int choice) {
-            switch (choice) {
-                case 1: {
-                    System.out.println("Add new connection");
-                    this.addNewConnection();
-                }
-                break;
-                case 2: {
-                    System.out.println("Show connection list");
-                    this.showConnectionsList();
-                }
-                break;
-                case 3: {
-                    System.out.println("Show connection recommendations");
-                    this.showRecommendedConnections();
-                }
-                break;
-                case 4: {
-                    System.out.println("Show connection requests");
-                    this.showConnectionRequests();
-                }
-                break;
-                case 5: {
-                    System.out.println("Send message");
-                    this.sendMessage();
-                }
-                break;
-                case 6: {
-                    System.out.println("Open inbox");
-                    this.openInbox();
-                }
-                break;
-                case 7: {
-                    this.isLoggedIn = false;
-                }
-                break;
-                default:
-                    System.out.println("Invalid choice");
-                    break;
+        switch (choice) {
+            case 1: {
+                System.out.println("Add new connection");
+                this.addNewConnection();
             }
+                break;
+            case 2: {
+                System.out.println("Show connection list");
+                this.showConnectionsList();
+            }
+                break;
+            case 3: {
+                System.out.println("Show connection recommendations");
+                this.showRecommendedConnections();
+            }
+                break;
+            case 4: {
+                System.out.println("Show connection requests");
+                this.showConnectionRequests();
+            }
+                break;
+            case 5: {
+                System.out.println("Send message");
+                this.sendMessage();
+            }
+                break;
+            case 6: {
+                System.out.println("Open inbox");
+                this.openInbox();
+            }
+                break;
+            case 7: {
+                this.isLoggedIn = false;
+            }
+                break;
+            default:
+                System.out.println("Invalid choice");
+                break;
+        }
 
     }
 
@@ -103,11 +104,19 @@ public class UserMenuView implements ICLIView {
     }
 
     private void showRecommendedConnections() {
+        HashMap<User, HashMap<User, Integer>> tempDb = socialMediaService.tempDb;
+
+//        reset numberValue and isVisited
+        for (User user : tempDb.keySet()) {
+            user.isVisited = false;
+            user.numberValue = 999;
+        }
+
         LinkedList<User> connectionRecommendations = this.socialMediaService.getFriendRecommendations(this.currentUser);
         System.out.println("Choose to send connection request: ");
-        System.out.println("0, Back");
+        System.out.println("0. Back");
         for (User user : connectionRecommendations) {
-            System.out.println( connectionRecommendations.indexOf(user) + 1 + ". " + user.name);
+            System.out.println(connectionRecommendations.indexOf(user) + 1 + ". " + user.name);
         }
         System.out.print("Enter your choice: ");
         Scanner scanner = new Scanner(System.in);
@@ -156,7 +165,7 @@ public class UserMenuView implements ICLIView {
         LinkedList<User> senders = this.socialMediaService.getInboxSenders(this.currentUser);
 
         int choice2 = 1;
-        while (choice2 > 1 ) {
+        while (choice2 >= 1) {
             System.out.println("Choose inbox to open");
             System.out.println("0, Back");
             for (User user : senders) {
@@ -168,31 +177,22 @@ public class UserMenuView implements ICLIView {
             if (choice2 <= 0 || choice2 > senders.size()) {
                 return;
             }
-            this.socialMediaService.readMessage(currentUser, senders.get(choice2 - 1));
+            LinkedList<String> messages = this.socialMediaService.readMessage(currentUser, senders.get(choice2 - 1));
+            for (String msg : messages) {
+                System.out.println(msg);
+            }
             System.out.println("Reply message?");
             System.out.println("1. Yes");
             System.out.println("2. No");
             System.out.print("Enter your choice: ");
             Scanner scanner2 = new Scanner(System.in);
             int choice3 = scanner2.nextInt();
-            scanner2.close();
             if (choice3 == 1) {
                 System.out.print("Enter your message: ");
                 Scanner scanner3 = new Scanner(System.in);
                 String message = scanner3.nextLine();
-                scanner3.close();
                 this.socialMediaService.sendMessage(currentUser, senders.get(choice2 - 1), message);
             }
         }
-    }
-
-    private boolean isUserExists(String name) {
-        HashMap<User, HashMap<User, Integer>> tempDb = socialMediaService.tempDb;
-        for (User user : tempDb.keySet()) {
-            if (user.name.equals(name)) {
-                return true;
-            }
-        }
-        return false;
     }
 }
