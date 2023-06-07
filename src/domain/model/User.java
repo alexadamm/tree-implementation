@@ -15,11 +15,11 @@ public class User {
         this.name = name;
         this.connections = new LinkedList<>();
         this.connectionReq = new LinkedList<>();
+        this.inbox = new HashMap<>();
         this.reset();
     }
 
     public void reset() {
-        this.inbox = new HashMap<>();
         this.isVisited = false;
         this.numberValue = 999;
     }

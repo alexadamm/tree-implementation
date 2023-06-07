@@ -3,18 +3,19 @@ package presentation;
 import domain.model.User;
 import domain.services.SocialMediaService;
 import utils.Helper;
-
 import java.util.HashMap;
 import java.util.Scanner;
 
-public class MainMenuView implements  ICLIView {
+public class MainMenuView implements ICLIView {
     SocialMediaService socialMediaService;
+
     public MainMenuView(SocialMediaService socialMediaService) {
         this.socialMediaService = socialMediaService;
     }
+
     @Override
     public void showMenu() {
-        while  (true) {
+        while (true) {
             Helper.printLine();
             System.out.println("Welcome to Social Media");
             System.out.println("1. Login");
@@ -30,42 +31,42 @@ public class MainMenuView implements  ICLIView {
 
     @Override
     public void action(int choice) {
-            switch (choice) {
-                case 1: {
-                    System.out.println("Login");
-                    System.out.print("Enter your name: ");
-                    Scanner scanner = new Scanner(System.in);
-                    String name = scanner.nextLine();
-                    if (isUserExists(name)) {
-                        User you = socialMediaService.login(name);
-                        UserMenuView userMenuView = new UserMenuView(you, socialMediaService);
-                        userMenuView.showMenu();
-                    } else {
-                        System.out.println("User does not exist");
-                    }
-                    break;
-                }
-                case 2: {
-                    System.out.println("Register");
-                    System.out.print("Enter your name: ");
-                    Scanner scanner = new Scanner(System.in);
-                    String name = scanner.nextLine();
-                    if (!isUserExists(name)) {
-                        User you = socialMediaService.register(name);
-                        UserMenuView userMenuView = new UserMenuView(you, socialMediaService);
-                        userMenuView.showMenu();
-                    } else {
-                        System.out.println("User already exists");
-                    }
+        switch (choice) {
+            case 1: {
+                System.out.println("Login");
+                System.out.print("Enter your name: ");
+                Scanner scanner = new Scanner(System.in);
+                String name = scanner.nextLine();
+                if (isUserExists(name)) {
+                    User you = socialMediaService.login(name);
+                    UserMenuView userMenuView = new UserMenuView(you, socialMediaService);
+                    userMenuView.showMenu();
+                } else {
+                    System.out.println("User does not exist");
                 }
                 break;
-                case 3:
-                    System.exit(0);
-                    break;
-                default:
-                    System.out.println("Invalid choice");
-                    break;
             }
+            case 2: {
+                System.out.println("Register");
+                System.out.print("Enter your name: ");
+                Scanner scanner = new Scanner(System.in);
+                String name = scanner.nextLine();
+                if (!isUserExists(name)) {
+                    User you = socialMediaService.register(name);
+                    UserMenuView userMenuView = new UserMenuView(you, socialMediaService);
+                    userMenuView.showMenu();
+                } else {
+                    System.out.println("User already exists");
+                }
+            }
+                break;
+            case 3:
+                System.exit(0);
+                break;
+            default:
+                System.out.println("Invalid choice");
+                break;
+        }
 
     }
 
