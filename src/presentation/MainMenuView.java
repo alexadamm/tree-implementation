@@ -17,6 +17,17 @@ public class MainMenuView implements ICLIView {
 
     @Override
     public void showMenu() {
+        System.out.println("""
+
+                 .d8888b.                                               888    8888888
+                d88P  Y88b                                              888      888
+                888    888                                              888      888
+                888         .d88b.  88888b.  88888b.   .d88b.   .d8888b 888888   888   88888b.
+                888        d88''88b 888 '88b 888 '88b d8P  Y8b d88P'    888      888   888 '88b
+                888    888 888  888 888  888 888  888 88888888 888      888      888   888  888
+                Y88b  d88P Y88..88P 888  888 888  888 Y8b.     Y88b.    Y88b.    888   888  888
+                 'Y8888P'   'Y88P'  888  888 888  888  'Y8888   'Y8888P  'Y888 8888888 888  888
+                                """);
         while (true) {
             Helper.printLine();
             System.out.println("Welcome to ConnectIn");
