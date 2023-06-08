@@ -1,5 +1,6 @@
 import domain.model.User;
 import domain.services.SocialMediaService;
+import presentation.ICLIView;
 import presentation.MainMenuView;
 import utils.Helper;
 
@@ -13,7 +14,7 @@ public class Main {
 
         SocialMediaService socialMediaService = new SocialMediaService(tempDb);
         Helper.addConnectionRecommendationsDemo(socialMediaService);
-        MainMenuView mainMenuView = new MainMenuView(socialMediaService);
+        ICLIView mainMenuView = new MainMenuView(socialMediaService);
         mainMenuView.showMenu();
     }
 }

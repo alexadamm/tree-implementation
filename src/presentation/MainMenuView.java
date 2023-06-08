@@ -58,7 +58,7 @@ public class MainMenuView implements ICLIView {
                         System.out.println("Invalid password!");
                         break;
                     }
-                    UserMenuView userMenuView = new UserMenuView(you, socialMediaService);
+                    ICLIView userMenuView = new UserMenuView(you, socialMediaService);
                     userMenuView.showMenu();
                 } else {
                     System.out.println("User does not exist!");
@@ -79,7 +79,7 @@ public class MainMenuView implements ICLIView {
                         break;
                     }
                     User you = socialMediaService.register(name, new String(password));
-                    UserMenuView userMenuView = new UserMenuView(you, socialMediaService);
+                    ICLIView userMenuView = new UserMenuView(you, socialMediaService);
                     userMenuView.showMenu();
                 } else {
                     System.out.println("User already exists!");
