@@ -3,6 +3,8 @@ package presentation;
 import domain.model.User;
 import domain.services.SocialMediaService;
 import utils.Helper;
+
+import java.io.Console;
 import java.util.HashMap;
 import java.util.Scanner;
 
@@ -38,11 +40,17 @@ public class MainMenuView implements ICLIView {
                 Scanner scanner = new Scanner(System.in);
                 String name = scanner.nextLine();
                 if (isUserExists(name)) {
-                    User you = socialMediaService.login(name);
+                    Console console = System.console();
+                    char[] password = console.readPassword("Enter your password: ");
+                    User you = socialMediaService.login(name, new String(password));
+                    if (you == null) {
+                        System.out.println("Invalid password!");
+                        break;
+                    }
                     UserMenuView userMenuView = new UserMenuView(you, socialMediaService);
                     userMenuView.showMenu();
                 } else {
-                    System.out.println("User does not exist");
+                    System.out.println("User does not exist!");
                 }
                 break;
             }
@@ -52,11 +60,18 @@ public class MainMenuView implements ICLIView {
                 Scanner scanner = new Scanner(System.in);
                 String name = scanner.nextLine();
                 if (!isUserExists(name)) {
-                    User you = socialMediaService.register(name);
+                    Console console = System.console();
+                    char[] password = console.readPassword("Enter your password: ");
+                    char[] confirmPassword = console.readPassword("Confirm your password: ");
+                    if (!new String(password).equals(new String(confirmPassword))) {
+                        System.out.println("Passwords do not match!");
+                        break;
+                    }
+                    User you = socialMediaService.register(name, new String(password));
                     UserMenuView userMenuView = new UserMenuView(you, socialMediaService);
                     userMenuView.showMenu();
                 } else {
-                    System.out.println("User already exists");
+                    System.out.println("User already exists!");
                 }
             }
                 break;

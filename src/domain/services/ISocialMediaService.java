@@ -28,7 +28,7 @@ public interface ISocialMediaService {
 
     User getUserByName(String name);
 
-    User login(String name);
+    User login(String name, String password);
 
-    User register(String name);
+    User register(String name, String password);
 }
