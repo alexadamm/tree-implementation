@@ -195,16 +195,30 @@ public class SocialMediaService implements ISocialMediaService {
     }
 
     @Override
-    public User login(String name) {
+    public User login(String name, String password) {
         for (User user : tempDb.keySet()) {
-            if (user.name.equals(name))
-                return user;
+            if (user.name.equals(name)) {
+                if (user.password.equals(password))
+                    return user;
+                else
+                    return null;
+            }
         }
         return null;
     }
 
     @Override
-    public User register(String name) {
+    public User register(String name, String password) {
+        for (User user : tempDb.keySet()) {
+            if (user.name.equals(name))
+                return null;
+        }
+        User newUser = new User(name, password);
+        tempDb.put(newUser, new HashMap<User, Integer>());
+        return newUser;
+    }
+
+    public User registerWithoutPassword(String name) {
         for (User user : tempDb.keySet()) {
             if (user.name.equals(name))
                 return null;
@@ -213,4 +227,5 @@ public class SocialMediaService implements ISocialMediaService {
         tempDb.put(newUser, new HashMap<User, Integer>());
         return newUser;
     }
+
 }

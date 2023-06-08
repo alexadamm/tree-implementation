@@ -18,13 +18,13 @@ public class Helper {
 
     public static void addConnectionRecommendationsDemo(SocialMediaService socialMediaService) {
 
-        User adam = socialMediaService.register("Adam");
-        User yazid = socialMediaService.register("Yazid");
-        User azmi = socialMediaService.register("Azmi");
-        User davin = socialMediaService.register("Davin");
-        User aji = socialMediaService.register("Aji");
-        User ikmal = socialMediaService.register("Ikmal");
-        User akib = socialMediaService.register("Akib");
+        User adam = socialMediaService.register("Adam", "demo");
+        User yazid = socialMediaService.register("Yazid", "demo");
+        User azmi = socialMediaService.register("Azmi", "demo");
+        User davin = socialMediaService.register("Davin", "demo");
+        User aji = socialMediaService.register("Aji", "demo");
+        User ikmal = socialMediaService.register("Ikmal", "demo");
+        User akib = socialMediaService.register("Akib", "demo");
 
         socialMediaService.requestConnection(adam, yazid);
         socialMediaService.requestConnection(azmi, yazid);
