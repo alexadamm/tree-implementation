@@ -20,6 +20,8 @@ public interface ISocialMediaService {
 
     LinkedList<User> getFriendRecommendations(User user);
 
+    String findUser(User user, User targerUser);
+
     LinkedList<User> findMutual(User user, User otherUser);
 
     int findErdosNumber(User user, User otherUser);

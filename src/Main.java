@@ -1,6 +1,7 @@
 import domain.model.User;
 import domain.services.SocialMediaService;
 import presentation.MainMenuView;
+import utils.Helper;
 
 import java.util.HashMap;
 
@@ -9,7 +10,10 @@ import java.util.HashMap;
 public class Main {
     public static void main(String[] args) {
         HashMap<User, HashMap<User, Integer>> tempDb = new HashMap<>();
-        MainMenuView mainMenuView = new MainMenuView(new SocialMediaService(tempDb));
+
+        SocialMediaService socialMediaService = new SocialMediaService(tempDb);
+        Helper.addConnectionRecommendationsDemo(socialMediaService);
+        MainMenuView mainMenuView = new MainMenuView(socialMediaService);
         mainMenuView.showMenu();
     }
 }

@@ -27,7 +27,8 @@ public class UserMenuView implements ICLIView {
             System.out.println("4. Show connection requests");
             System.out.println("5. Send message");
             System.out.println("6. Open inbox");
-            System.out.println("7. Logout");
+            System.out.println("7. Find user");
+            System.out.println("8. Logout");
             System.out.print("Enter your choice: ");
             int choice = Helper.getChoice();
             Helper.printLine();
@@ -69,6 +70,11 @@ public class UserMenuView implements ICLIView {
             }
                 break;
             case 7: {
+                System.out.println("Find user");
+                this.findUser();
+            }
+                break;
+            case 8: {
                 this.isLoggedIn = false;
             }
                 break;
@@ -149,6 +155,19 @@ public class UserMenuView implements ICLIView {
             }
         }
         System.out.println("User not found");
+    }
+
+    private void findUser() {
+        System.out.print("Enter a name to find: ");
+        Scanner scanner = new Scanner(System.in);
+        String name = scanner.nextLine();
+        User result = this.socialMediaService.getUserByName(name);
+        if (result == null) {
+            System.out.println("User not found");
+        } else {
+            String message = this.socialMediaService.findUser(currentUser, result);
+            System.out.println(message);
+        }
     }
 
     private void openInbox() {
