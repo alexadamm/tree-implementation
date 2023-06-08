@@ -17,7 +17,7 @@ public class MainMenuView implements ICLIView {
     public void showMenu() {
         while (true) {
             Helper.printLine();
-            System.out.println("Welcome to Social Media");
+            System.out.println("Welcome to ConnectIn");
             System.out.println("1. Login");
             System.out.println("2. Register");
             System.out.println("3. Exit");
