@@ -122,6 +122,27 @@ public class SocialMediaService implements ISocialMediaService {
     }
 
     @Override
+    public String findUser(User user, User targetUser) {
+        String message = "";
+        // check is user is connected to targetUser
+        message += (user.connections.contains(targetUser)) ? "You are connected to " + targetUser.name + "\n"
+                : "You are not connected to " + targetUser.name + "\n";
+        // check mutual
+        LinkedList<User> mutualConnections = findMutual(user, targetUser);
+        if (mutualConnections.size() > 0) {
+            String mutualConnectionsName = "";
+            for (int i = 1; i <= mutualConnections.size(); i++) {
+                mutualConnectionsName += i + ". " + mutualConnections.get(i - 1).name + "\n";
+            }
+            message += "You have " + mutualConnections.size() + " mutual connections: \n"
+                    + mutualConnectionsName;
+        } else {
+            message += "Your connections have no mutual with him/her/they/them/it";
+        }
+        return message;
+    }
+
+    @Override
     public LinkedList<User> findMutual(User user, User otherUser) {
         LinkedList<User> mutualConnections = new LinkedList<>();
         for (User connection : user.connections) {
