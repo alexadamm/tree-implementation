@@ -40,7 +40,7 @@ public class UserMenuView implements ICLIView {
     public void action(int choice) {
         switch (choice) {
             case 1: {
-                System.out.println("Add new connection");
+                System.out.println("Request a new connection");
                 this.addNewConnection();
             }
                 break;
