@@ -127,7 +127,7 @@ public class UserMenuView implements ICLIView {
     private void showConnectionRequests() {
         LinkedList<User> connectionRequests = this.socialMediaService.getRequestConnections(this.currentUser);
         System.out.println("Choose to accept: ");
-        System.out.println("0, Back");
+        System.out.println("0. Back");
         for (User user : connectionRequests) {
             System.out.println(connectionRequests.indexOf(user) + 1 + ". " + user.name);
         }
